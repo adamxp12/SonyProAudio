@@ -1,0 +1,16 @@
+Stuff wrong with MDS RS232 PDF
+* Examples for Track Name/Disc name response are incorrect on the 2nd packet does not decode their example strings fully
+* No mention of the fact track play/track pause commands do not work in pause mode (work fine in play or stop)
+* auto pause command has no response and no responses contain the status of that feature
+* auto pause also will not return impossible if you try and enable when already enabled and vice versa making it literally impossible to figure out the status of that
+* Status response is kind of complex to understand until you realise that b7-b0 is binary not bytes. Could of mentioned that
+* Status response has the "disc exist" bit flipped. they have it down as disc exist being 1 on page 38 but is correct in the table at end of manual. its 0 for disc exist
+* status response sometimes has the wrong track number mainly when using auto-pause. does correct itself on play
+* annoyingly the track end response does not give a response as to what track is now cued up. you have to do that yourself. would be handy if the status response was also sent out
+* Track Time Data has a random H in the seconds data format. also seconds should never reach 60 surely?
+* Track Time Data does not have a track number so good luck knowing which track it is giving you data for
+* track time requests for track 0 give weird results instead of "impossible" unless the is a track 0 I am not aware of. Toc data?
+* play & pause return impossible when no disc is inserted. stop does not, seems inconsistant
+* Under the "Track no name write" description it describes it as "This is the command to input disc name." disc name != track name Sony
+* "All track name req" command returns garbage data. corupt headers (all first packets instead of first packet then 2nd packet), incomplete packets with no terminators and random track numbers for the valid packets it does send
+* changing tracks with prev/next during stop does not provoke a response. literally impossible to know what track is cued up
